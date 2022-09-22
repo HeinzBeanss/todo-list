@@ -1,0 +1,24 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "An application for users to input, view, and organise projects/todo lists.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HeinzBeanss/todo-list.git"
+  },
+  "keywords": [],
+  "author": "David Bean",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HeinzBeanss/todo-list/issues"
+  },
+  "homepage": "https://github.com/HeinzBeanss/todo-list#readme",
+  "devDependencies": {
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
+  }
+}
