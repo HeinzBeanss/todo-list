@@ -8,9 +8,8 @@ console.log(general);
 
 // -------------------------------------------------------------------------
 
-
 const addProjectButton = document.querySelector("#createproject");
-addProjectButton.addEventListener("click", createProject.addProject);
+addProjectButton.addEventListener("click", createProject.testFocus);
 
 // addProjectButton.addEventListener("click", () => {
 //     console.log("testing2")
