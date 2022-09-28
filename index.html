@@ -15,6 +15,10 @@
         <div class="sidebar">
             <div class="sidebartop">
                 <h2 class="projecttitle">PROJECTS</h2>
+
+                <ul class="projectList">
+                    <h2 class="selected selector">General</h2>
+                </ul>
             </div>
 
             <div class="sidebarbot">
@@ -24,7 +28,44 @@
         </div>
 
         <div class="maincontent">
+            <div class="todolists">
+                <h2 class="projecttitle">General</h2>
+                <div class="todocard">
 
+                    <h3 class="todotitle" contenteditable="true" >Write a title for your todo list.</h3>
+
+                    <p class="tododesc" contenteditable="true"></p>
+
+                    <div class="radiobuttons">
+                        <p class="priotitle">Priority:</p>
+                        <input id="prio" type="radio" class="todopriolow" value="low"></input>
+                        <label for="low">Low</label>
+                        <input id="prio" type="radio" class="todopriomedium" value="medium"></input>
+                        <label for="medium">Medium</label>
+                        <input id="prio" type="radio" class="todopriohigh" value="high"></input>
+                        <label for="high">High</label>
+                    </div>
+
+                    <div class="date">
+                        <label class="datetitle" for="duedate">Due Date:</label>
+                        <input type="date" id="duedate" class="tododuedate" value=""></input>
+                    </div>
+                    
+                    <!-- <h3 class="todotitle">Write a title for your todo list.</h3>
+                    <p class="tododesc">Write a description for your to do list...</p>
+                    <p class="todoprio">Priority: Unset</p>
+                    <p class="tododuedate">Date Due: Unset</p> -->
+
+                </div>
+            </div>
+        
+
+            <div class="bottombuttons">
+                <button class="addtodo offline">ADD</button>
+                <button class="edittodo offline">EDIT</button>
+                <button class="deletetodo online">DEL</button>
+                <button class="savebutton offline">SAVE</button>
+            </div>
         </div>
     </div>
 </body>
