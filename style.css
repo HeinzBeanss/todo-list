@@ -26,7 +26,7 @@ body {
 
 .sidebar {
     margin: 5px;
-    padding: 5px 15px;
+    padding: 5px 10px;
     background-color: rgb(24, 26, 27);
     /* border: red 1px solid; */
     box-shadow:  2px 0px  #00735b;
@@ -66,13 +66,14 @@ body {
 .projectList > h2 {
     box-sizing: border-box;
     color: #e6fff7;
-    padding: 10px;
-    margin: 2px;
+    padding: 7px;
+    margin: 10px;
     /* padding-bottom: 8px; */
     overflow-wrap: break-word;
     font-weight: 500;
     border-bottom: rgb(37, 39, 40) 2px solid;
     /* width: 95%; */
+    border-radius: 8px;
 }
 
 .sidebarbot {
@@ -97,7 +98,17 @@ body {
     padding: 10px 20px 0px 10px;
     /* justify-content: start; */
     /* align-items: flex-start; */
+    /* justify-content: space-between; */
+}
+
+.innermaincontent {
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    /* border: 1px solid red; */
+    
 }
 
 .contentinput {
@@ -118,29 +129,35 @@ body {
 
 .bottombuttons {
     display: flex;
+    /* justify-self: flex-end; */
+    /* align-self: flex-end; */
     justify-content: end;
     gap: 20px;
 }
 
 button {
     border-radius: 8px;
-    width: 150px;
+    width: 20%;
     height: 50px;
     margin-bottom: 22px;
     font-size: 1.1rem;
     font-weight: 500;
 }
 
+
 .offline {
     background-color: rgb(20, 22, 23, 0.8);
-    border: #00735b solid 2px;
-    color: #e6fff7;
+    /* border: #00735b solid 2px; */
+    border: 0;
+    color: rgb(230, 255, 247, 0.3);
+    cursor: not-allowed;
 }
 
 .online {
     background-color: rgb(20, 22, 23);
     border: #00735b solid 2px;
     color: #e6fff7;
+    cursor: pointer;
 }
 
 .projecttitle {
@@ -151,6 +168,14 @@ button {
     font-weight: 500;
     border-bottom: 1px solid #00735b;
     font-size: 2.2rem;
+}
+
+.todolists {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    align-items: start;
+    
 }
 
 .todocard {
