@@ -11,8 +11,10 @@ console.log(general);
 const addProjectButton = document.querySelector("#createproject");
 addProjectButton.addEventListener("click", designProject.addProject);
 
+const General = createProject.projectFactory("General", true);
 
-
+const addtodobutton = document.querySelector(".addtodo");
+addtodobutton.addEventListener("click", designProject.designTodo);
 
 
 // addProjectButton.addEventListener("click", () => {
