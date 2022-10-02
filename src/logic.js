@@ -8,18 +8,23 @@ const createProject = (() => {
 
     const projectFactory = (name, selected) => {
         
-        return { name, selected};
+        const todolists = [];
+        
+        return { name, selected, todolists};
     }
 
-    const addTodo = (selectedProject) => {
-        console.log("cry");
+    const todoFactory = (title, description, priority, duedate, selected) => {
+
+        return { title, description, priority, duedate, selected };
     }
-    
 
-    // const general = projectFactory("general");
-    // console.log(general.name);
 
-    return { projectFactory, Projects, addTodo };
+    // const addTodo = (selectedProject) => {
+    //     console.log("cry");
+    // }
+
+
+    return { projectFactory, Projects, todoFactory };
 
 })();
 
