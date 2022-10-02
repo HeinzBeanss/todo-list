@@ -67,7 +67,7 @@ body {
     box-sizing: border-box;
     color: #e6fff7;
     padding: 7px;
-    margin: 10px;
+    margin: 10px 0px;
     /* padding-bottom: 8px; */
     overflow-wrap: break-word;
     font-weight: 500;
@@ -178,6 +178,10 @@ button {
     
 }
 
+.todocard:focus-within {
+    border: #00735b 1px solid;
+}
+
 .todocard {
     display: flex;
     flex-direction: column;
@@ -208,6 +212,10 @@ h3 {
     background-color: rgb(35, 37, 38);
 }
 
+.selectedtodo {
+    border: #00735b 1px solid;
+}
+
 .todotitle {
     /* background-color: rgb(24, 26, 27); */
     box-sizing: border-box;
@@ -219,6 +227,7 @@ h3 {
     height:initial;
     width: 100%;    
     padding: 5px 0px;
+    border-bottom: rgb(35, 37, 38) 1px solid;
     
 }
 
@@ -232,9 +241,16 @@ h3 {
     width: 100%;
     overflow: hidden;
     resize: none;
+    border-bottom: rgb(35, 37, 38) 1px solid;
+    min-height: 80px;
 }
 
-.todotitle:focus, .tododesc:focus {
+.date {
+    display: flex;
+    align-items: center;
+}
+
+.todotitle:focus, .tododesc:focus, .duedate:focus {
     border-bottom: #00735b 1px solid;
 }
 
@@ -243,17 +259,25 @@ h3 {
     color: grey;
 }
 
+.duedate[contenteditable]:empty::before {
+    content: "Enter a timeframe or date to complete by.";
+    color: grey;
+}
+
 [contenteditable] {
     outline: 0px solid transparent;
 }
 
-.priotitle, .datetitle {
+.priotitle, .datelabel {
     padding: 5px 0px;
     font-weight: 500;
     font-size: 1.2rem;
     margin-right: 10px;
 }
 
+.duedate {
+    padding-top: 4px;
+}
 .todopriomedium, .todopriohigh {
     margin: 0px 4px 0px 20px;
 }
@@ -263,8 +287,17 @@ h3 {
     justify-content: start;
     align-items: center;
     gap: 2px;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
     
 }
+
 /* // press confirm
 // removes the input
 // adds the h2 element instead. */
