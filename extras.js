@@ -6,3 +6,14 @@ const declareMaxLength = () => {
         title.maxLength = "4";
     })
 } 
+
+const clearTodos = () => {
+    let todolists = document.querySelector(".todolists");
+    let children = todolists.lastElementChild;
+    while (children) {
+        todolists.removeChild(children);
+        children = todolists.lastElementChild;
+    }
+}
+
+todopriolow.setAttribute("disabled", "");
