@@ -6,16 +6,18 @@ const createProject = (() => {
 
     
 
-    const projectFactory = (name, selected) => {
+    const projectFactory = (name, selected, id) => {
         
         const todolists = [];
         
-        return { name, selected, todolists};
+        return { name, selected, todolists, id};
     }
 
-    const todoFactory = (title, description, priority, duedate, selected) => {
+    const todoFactory = (title, description, priority, duedate, selected, id) => {
 
-        return { title, description, priority, duedate, selected };
+        let deleted = false;
+        
+        return { title, description, priority, duedate, selected, id, deleted};
     }
 
 
