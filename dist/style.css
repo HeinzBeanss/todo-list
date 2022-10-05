@@ -84,6 +84,7 @@ body {
 }
 
 .sidebarbot > img {
+    height: 40px;
     cursor: pointer;
     padding-right: 15px;
     padding-bottom: 10px;

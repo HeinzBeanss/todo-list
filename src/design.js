@@ -16,8 +16,59 @@ const designProject = (() => {
     deletebutton.disabled = true;
     const editbutton = document.querySelector(".edittodo");
     editbutton.disabled = true;
+    const delprojectbutton = document.querySelector("#deleteproject");
+    const editprojectbutton = document.querySelector("#editproject");
+    // const save = document.querySelector("#save");
+    // const upload = document.querySelector("#upload");
 
     // PROJECT FUNCTIONS -----------------------------------------------------------------------
+
+    const displayProjects = () => {
+
+        allProjects.forEach(projectnumber => {
+
+            if (projectnumber.deleted === false) {
+
+                const newProjectLabel = document.createElement("h2");
+                newProjectLabel.textContent = projectnumber.name;
+                newProjectLabel.classList.add("selector");
+                newProjectLabel.setAttribute("id", projectnumber.id);
+                projectList.appendChild(newProjectLabel);
+
+            }
+        }) 
+    }
+
+    const deleteProject = () => {
+
+        allProjects.forEach(projectnumber => {
+            if (projectnumber.selected === true){
+               
+                const temptodolists = document.querySelector(".todolists");
+                let children = temptodolists.lastElementChild;
+                while (children) {
+                    temptodolists.removeChild(children);
+                    children = temptodolists.lastElementChild;
+                }
+
+                const temptitle = document.querySelector("#ptitle");
+                temptitle.textContent = "";
+                
+                const tempprojects = document.querySelector(".projectList");
+                let projectchildren = tempprojects.lastElementChild;
+                while (projectchildren) {
+                    tempprojects.removeChild(projectchildren);
+                    projectchildren = tempprojects.lastElementChild;
+                }
+
+                projectnumber.selected = false;
+                projectnumber.deleted = true;
+
+                displayProjects();
+                // display projects.
+            }
+        })
+    }
 
     const addProject = () => {
 
@@ -30,7 +81,7 @@ const designProject = (() => {
             projectnumber.selected = false;
         })
 
-        const project = createProject.projectFactory("project", true, i);
+        const project = createProject.projectFactory("New Project", true, i);
         console.log(project);
         
         allProjects.push(project);
@@ -43,6 +94,9 @@ const designProject = (() => {
         projectList.appendChild(newProjectLabel);
         console.log(allProjects);
 
+        const temptitle = document.querySelector("#ptitle");
+        temptitle.textContent = "New Project";
+
         editbutton.disabled = true;
         editbutton.classList.add("offline");
         editbutton.classList.remove("online");
@@ -52,6 +106,7 @@ const designProject = (() => {
         savebutton.disabled = true;
         savebutton.classList.add("offline");
         savebutton.classList.remove("online");
+
 
     }
 
@@ -76,7 +131,6 @@ const designProject = (() => {
             }
         })
 
-        // return selectedProject = project.target;
     }
 
     const clearAllSelectors = () => {
@@ -96,6 +150,10 @@ const designProject = (() => {
 
         allProjects.forEach(projectnumber => {
             if (projectnumber.selected === true) {
+
+                const tempprojecttitle = document.querySelector("#ptitle");
+                tempprojecttitle.setAttribute("contenteditable", true);
+
                 projectnumber.todolists.forEach(todonumber => {
                     if (todonumber.selected === true) {
 
@@ -131,6 +189,13 @@ const designProject = (() => {
     const saveTodo = () => {
         allProjects.forEach(projectnumber => {
             if (projectnumber.selected === true) {
+
+
+                const tempprojecttitle = document.querySelector("#ptitle");
+                projectnumber.name = tempprojecttitle.textContent;
+                const tempprojectsidebar = document.querySelector(".selected");
+                tempprojectsidebar.textContent = projectnumber.name;
+                tempprojecttitle.setAttribute("contenteditable", "false");
 
                 projectnumber.todolists.forEach(todonumber => {
                     if (todonumber.selected === true) {
@@ -184,10 +249,14 @@ const designProject = (() => {
                 editbutton.classList.remove("offline");
                 }
         })
+
+        populateStorage;
     }
 
     const selectTodo = (todo) => {
         console.log(todo.target);
+
+        // saveTodo(); // LOOK INTO
         clearAllTodoSelectors();
 
         // make sure here, that whatever todolist was selected, gets reselected.
@@ -293,12 +362,7 @@ const designProject = (() => {
         while (children) {
         todolists.removeChild(children);
         children = todolists.lastElementChild;
-    }
-
-    }
-
-    const registerTodo = () => {
-
+        }
     }
 
     const designEmptyTodo = () => {
@@ -319,6 +383,8 @@ const designProject = (() => {
         savebutton.classList.remove("offline");
         savebutton.classList.add("online");
         
+        const tempprojecttitle = document.querySelector("#ptitle");
+        tempprojecttitle.setAttribute("contenteditable", true);
 
         let cardnumber = x++; 
         
@@ -428,8 +494,15 @@ const designProject = (() => {
 
         allProjects.forEach(projectnumber => {
             if (projectnumber.selected === true) {
-                
-                projectnumber.todolists.forEach(todolist => {
+
+                if (projectnumber.deleted === false) {
+
+                    const temptitle = document.querySelector("#ptitle");
+                    temptitle.textContent = projectnumber.name;
+            
+                    projectnumber.todolists.forEach(todolist => {
+
+                        if (todolist.deleted === false) {
                     
                     const todocard = document.createElement("div");
                     todocard.classList.add("todocard");
@@ -517,9 +590,10 @@ const designProject = (() => {
                     duedate.setAttribute("contenteditable", "false");
                     duedate.textContent = todolist.duedate;
                     date.appendChild(duedate);
+                }
 
                 })
-                
+            }
             }
         })
 
@@ -558,6 +632,27 @@ const designProject = (() => {
         // editbutton.classList.add("offline");
     }
 
+    // SAVING JSON -------------------------------------------
+
+      const populateStorage = () => {
+        localStorage.setItem("allprojects", allProjects);
+        setStyles();
+    }
+
+    const setStyles = () => {
+
+        // allProjects = localStorage.getItem("allprojects"); 
+    //     console.log(allProjects); WHAT'S WRONG WITH THE ABOVE LINE
+    }
+
+    if (!localStorage.getItem("allprojects")) {
+        populateStorage();
+        } else {
+        setStyles();
+        }
+    
+
+
     // EVENTLISTENERS
 
     projectList.addEventListener("click", selectProject);
@@ -565,8 +660,15 @@ const designProject = (() => {
     savebutton.addEventListener("click", saveTodo);
     deletebutton.addEventListener("click", deleteTodo);
     editbutton.addEventListener("click", editTodo);
+    delprojectbutton.addEventListener("click", deleteProject);
+    // editprojectbutton.addEventListener("click", editProject);
+    
+    // save.addEventListener("click", populateStorage);
+    // upload.addEventListener("click", uploadStorage);
+
     return { addProject, designEmptyTodo, allProjects};
 
+ 
 })();
 
 export {designProject};

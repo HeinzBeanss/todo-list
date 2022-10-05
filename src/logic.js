@@ -9,8 +9,9 @@ const createProject = (() => {
     const projectFactory = (name, selected, id) => {
         
         const todolists = [];
+        let deleted = false;
         
-        return { name, selected, todolists, id};
+        return { name, selected, todolists, id, deleted};
     }
 
     const todoFactory = (title, description, priority, duedate, selected, id) => {
@@ -25,6 +26,7 @@ const createProject = (() => {
     //     console.log("cry");
     // }
 
+    
 
     return { projectFactory, Projects, todoFactory };
 
