@@ -17,3 +17,31 @@ const clearTodos = () => {
 }
 
 todopriolow.setAttribute("disabled", "");
+
+
+
+
+
+    // const populateStorage = () => {
+    //     localStorage.setItem("allprojects", allProjects);
+    //     setStyles();
+    // }
+
+    // const setStyles = () => {
+
+    //     let currentProjects = localStorage.getItem("allprojects");
+    //     return allProjects = currentProjects;
+    //     console.log(allProjects);
+
+    //     let test = localStorage.getItem("testString");
+    //     testString = test;
+    // }
+    
+    // // // allProjects.onchange = populateStorage;
+    // // console.log(testString);
+
+    // if (!localStorage.getItem("allprojects")) {
+    //     populateStorage();
+    //     } else {
+    //     setStyles();
+    //     }
