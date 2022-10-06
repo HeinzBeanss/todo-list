@@ -1,10 +1,14 @@
 import {createProject} from "../src/logic"
 
-const designProject = (() => {
+const designProject = (() => 
 
+{
+
+    
     let allProjects = [];
     let projectTodos = [];
-    let x = 1
+    let y = 0;
+    let x = 1;
 
     const sidebartop = document.querySelector(".sidebartop");
     const projectList = document.querySelector(".projectList")
@@ -12,14 +16,33 @@ const designProject = (() => {
     const savebutton = document.querySelector(".savebutton");
     savebutton.disabled = true;
     const addtodobutton = document.querySelector(".addtodo");
+    addtodobutton.disabled = true;
     const deletebutton = document.querySelector(".deletetodo");
     deletebutton.disabled = true;
     const editbutton = document.querySelector(".edittodo");
     editbutton.disabled = true;
     const delprojectbutton = document.querySelector("#deleteproject");
     const editprojectbutton = document.querySelector("#editproject");
+
     // const save = document.querySelector("#save");
     // const upload = document.querySelector("#upload");
+    
+    // if (projectList.firstChild === true) {
+
+    // } else {
+
+    //     const project = createProject.projectFactory("General", true, 0);
+    //     designProject.allProjects.push(project);
+
+    //     const firstproject = document.createElement("h2");
+    //     firstproject.setAttribute("id", "0");
+    //     firstproject.classList.add("selected");
+    //     firstproject.classList.add("selector");
+    //     firstproject.textContent = "General";
+    //     projectList.appendChild(firstproject);
+    // }
+   
+
 
     // PROJECT FUNCTIONS -----------------------------------------------------------------------
 
@@ -52,7 +75,7 @@ const designProject = (() => {
                 }
 
                 const temptitle = document.querySelector("#ptitle");
-                temptitle.textContent = "";
+                temptitle.textContent = "Select a project";
                 
                 const tempprojects = document.querySelector(".projectList");
                 let projectchildren = tempprojects.lastElementChild;
@@ -65,7 +88,6 @@ const designProject = (() => {
                 projectnumber.deleted = true;
 
                 displayProjects();
-                // display projects.
             }
         })
     }
@@ -74,8 +96,9 @@ const designProject = (() => {
 
         clearAllTodos();
         clearAllSelectors();
+        
 
-        let i = x++
+        let i = y++
 
         allProjects.forEach(projectnumber => {
             projectnumber.selected = false;
@@ -97,6 +120,9 @@ const designProject = (() => {
         const temptitle = document.querySelector("#ptitle");
         temptitle.textContent = "New Project";
 
+        addtodobutton.disabled = false;
+        addtodobutton.classList.add("online");
+        addtodobutton.classList.remove("offline");
         editbutton.disabled = true;
         editbutton.classList.add("offline");
         editbutton.classList.remove("online");
@@ -535,7 +561,6 @@ const designProject = (() => {
                     todopriolow.setAttribute("name","prio");
                     todopriolow.setAttribute("type","radio");
                     todopriolow.setAttribute("value","low");
-                    todopriolow.setAttribute("disabled", "");
                     radiobuttons.appendChild(todopriolow);
                     const todopriolowlabel = document.createElement("label");
                     todopriolowlabel.textContent = "Low";
@@ -547,7 +572,6 @@ const designProject = (() => {
                     todopriomedium.setAttribute("name","prio");
                     todopriomedium.setAttribute("type","radio");
                     todopriomedium.setAttribute("value","medium");
-                    todopriomedium.setAttribute("disabled", "");
                     radiobuttons.appendChild(todopriomedium);
                     const todopriomediumlabel = document.createElement("label");
                     todopriomediumlabel.textContent = "Medium";
@@ -559,7 +583,6 @@ const designProject = (() => {
                     todopriohigh.setAttribute("name","prio");
                     todopriohigh.setAttribute("type","radio");
                     todopriohigh.setAttribute("value","high");
-                    todopriohigh.setAttribute("disabled", "");
                     radiobuttons.appendChild(todopriohigh);
                     const todopriohighlabel = document.createElement("label");
                     todopriohighlabel.textContent = "High";
@@ -568,12 +591,22 @@ const designProject = (() => {
 
                     if (todolist.priority === "low") {
                         todopriolow.setAttribute("checked", "");
+                        todopriomedium.setAttribute("disabled", "");
+                        todopriohigh.setAttribute("disabled", "");
                     } else if (todolist.priority === "medium") {
                         todopriomedium.setAttribute("checked", "");
+                        todopriolow.setAttribute("disabled", "");
+                        todopriohigh.setAttribute("disabled", "");
                     } else if (todolist.priority === "high") {
+                        todopriolow.setAttribute("disabled", "");
+                        todopriomedium.setAttribute("disabled", "");
                         todopriohigh.setAttribute("checked", "");
                     } else {
                     }
+
+                    // todopriolow.setAttribute("disabled", "");
+                    // todopriomedium.setAttribute("disabled", "");
+                    // todopriohigh.setAttribute("disabled", "");
             
                     const date = document.createElement("div");
                     date.classList.add("date");
@@ -635,21 +668,34 @@ const designProject = (() => {
     // SAVING JSON -------------------------------------------
 
       const populateStorage = () => {
-        localStorage.setItem("allprojects", allProjects);
-        setStyles();
+        localStorage.setItem("allprojects", JSON.stringify(allProjects));
+        console.log(localStorage);
     }
 
-    const setStyles = () => {
+    const uploadStorage = () => {
+        console.log(localStorage)
+        allProjects = JSON.parse(localStorage.getItem("allprojects"));
+        console.log(localStorage);
 
-        // allProjects = localStorage.getItem("allprojects"); 
-    //     console.log(allProjects); WHAT'S WRONG WITH THE ABOVE LINE
+        displayProjects();
     }
 
     if (!localStorage.getItem("allprojects")) {
-        populateStorage();
-        } else {
-        setStyles();
-        }
+        
+    } else {
+        uploadStorage();
+    }
+    
+
+    // console.log(localStorage);
+    // localStorage.removeItem("allprojects");
+    // console.log(localStorage);
+
+    // if (!localStorage.getItem("allprojects")) {
+    //     populateStorage();
+    //     } else {
+    //     setStyles();
+    //     }
     
 
 
@@ -662,8 +708,7 @@ const designProject = (() => {
     editbutton.addEventListener("click", editTodo);
     delprojectbutton.addEventListener("click", deleteProject);
     // editprojectbutton.addEventListener("click", editProject);
-    
-    // save.addEventListener("click", populateStorage);
+    save.addEventListener("click", populateStorage);
     // upload.addEventListener("click", uploadStorage);
 
     return { addProject, designEmptyTodo, allProjects};
